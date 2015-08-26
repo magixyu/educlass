@@ -1,0 +1,106 @@
+{% extends 'TopxiaWebBundle::layout.html.twig' %}
+
+{% block keywords %}{{ setting('site.seo_keywords') }}{% endblock %}
+{% block description %}{{ setting('site.seo_description') }}{% endblock %}
+
+{% set siteNav = '/' %}
+{% set bodyClass = 'indexpage' %}
+{% set script_controller = 'index' %} 
+
+{% block full_content %}
+  {{ block_show('mooc:home_top_banner') }}
+{# {% endblock %} #}
+
+{# {% block container %} #}
+
+  {% set recommendCourses = data('RecommendCourses',{ count:6 }) %}
+  {% if recommendCourses %}      
+    <section class="es-section section-gray">
+      <div class="container">
+        <div class="section-header clearfix">
+          <h4>推荐课程</h4>
+          <a href="{{ path('course_explore') }}" class="more">更多</a>
+        </div>
+        <div class="section-bodyer">
+          <div class="home-course-list row">
+            {% for course in recommendCourses %}
+                {% if course %}
+                  {% include 'TopxiaWebBundle:Default:course-item.html.twig' with {course:course} %}
+                {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </section>
+  {% endif %}
+
+  {% set latestCourses = data('LatestCourses',{ count:6 }) %}
+  {% if latestCourses %}      
+    <section class="es-section">
+      <div class="container">
+        <div class="section-header clearfix">
+          <h4>最新课程</h4>
+          <a href="{{ path('course_explore') }}" class="more">更多</a>
+        </div>
+        <div class="section-bodyer">
+          <div class="home-course-list row">
+            {% for course in latestCourses %}
+              {% if course %}
+                {% include 'TopxiaWebBundle:Default:course-item.html.twig' with {course:course} %}
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </section>
+  {% endif %}
+
+  {% set teachers = data('RecommendTeachers',{'count':3}) %}
+  {% if teachers %}
+    <section class="es-section section-gray">
+      <div class="container">
+        <div class="section-header clearfix">
+          <h4>名师风采</h4>
+          <a href="{{ path('teacher') }}" class="more">更多</a>
+        </div>
+        <div class="section-bodyer">
+          <div class="home-teacher-list row">
+            {% for teacher in teachers %}
+              <div class="teacher-item col-md-4 col-sm-4">
+                {% include 'TopxiaWebBundle:Teacher:teacher-item.html.twig' %}
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </section>
+  {% endif %}
+
+  <section class="feature-section">
+    <div class="container">
+      <div class="cow">
+        <div class="feature-item col-sm-4">
+          <img class="img-responsive" src="{{asset('themes/mooc/img/feature_1.png')}}" alt="">
+        </div>
+        <div class="feature-item col-sm-4">
+          <img class="img-responsive" src="{{asset('themes/mooc/img/feature_2.png')}}" alt="">
+        </div>
+        <div class="feature-item col-sm-4">
+          <img class="img-responsive" src="{{asset('themes/mooc/img/feature_3.png')}}" alt="">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="learning-section">
+    <div class="container">
+      <div class="title">
+        <img class="img-responsive" src="{{asset('themes/mooc/img/learning_title.png')}}" alt="">
+      </div>
+      <a class="btn btn-learn" href="{{ path('course_explore') }}">
+        开始学习<span class="icon-start"></span>
+      </a>
+    </div>
+  </section>
+
+{% endblock %}

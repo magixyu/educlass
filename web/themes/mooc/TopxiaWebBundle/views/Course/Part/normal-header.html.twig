@@ -1,0 +1,88 @@
+{% import "TopxiaWebBundle::macro.html.twig" as web_macro %}
+{% import _self as header_macro %}
+{% do load_script('course/common') %}
+
+{% if member and not member.locked %}
+  {% include 'TopxiaWebBundle:Course:Part/normal-header-for-member.html.twig' %}
+{% elseif course.parentId|default(false) %}
+  {% include 'TopxiaWebBundle:Course:Part/normal-header-for-guest.html.twig' with {source:"classroom"} %}
+{% else %}
+  
+  {% include 'TopxiaWebBundle:Course:Part/normal-header-for-guest.html.twig' %}
+{% endif %}
+{% macro picture(course) %}
+  <div class="course-header-img">
+    <a href="{{ path('course_show', {id:course.id}) }}"><img class="img-responsive" src="{{ filepath(course.largePicture, 'course.png') }}"></a>
+  </div>
+{% endmacro %} 
+{% macro info(course, member) %}
+  {% import "TopxiaWebBundle::macro.html.twig" as web_macro %}
+  <div class="course-header-info">
+    <div class="title clearfix">
+        <span><a href="{{ path('course_show', {id:course.id}) }}">{{ course.title }}</a></span>
+    </div>
+    <div class="content">{{course.subtitle}}</div>
+    <div class="metas hidden-xs hidden-sm">
+      <p class="student-num ">
+        {% if course.showStudentNumType == 'opened' %}
+        <label for="">学员数</label><span>{{ course.studentNum }}</span>人
+        {% endif %}
+      </p> 
+      {% if not member %}
+        {% if course.expiryDay %}
+          <p class="expiry-date">
+            <label for="">有效期</label><span>{{ course.expiryDay }}天</span>
+          </p>
+        {% endif %}
+        <p class="discount-price">
+          {% if course.discountId == 0 %}
+            <label>价格</label>
+          {% else %}
+            <label>折后价</label>
+          {% endif %}
+          {% include 'TopxiaWebBundle:Course:Widget/course-price.html.twig' with {shows: ['price', 'discount']} %}
+        </p>
+        {% if course.discountId > 0 %}
+          <p class="old-price hidden-sm">
+            <label>原价</label>
+            {% include 'TopxiaWebBundle:Course:Widget/course-price.html.twig' with {shows: ['originPrice']} %}
+          </p>
+          {% if course.discountObj|default(null) %}
+            <p class="activity">
+              <label>活动</label>
+              <span class="name">{{ course.discountObj.name }}</span>
+              <span><i class="es-icon es-icon-accesstime"></i> <span id="discount-endtime-countdown" class="text-muted" data-remaintime="{{ course.discountObj.endTime - 'now'|date('U') }}"></span></span>
+            </p>
+          {% endif %}
+        {% endif %}
+      {% endif %}
+    </div>
+  </div>
+{% endmacro %} 
+{% macro favorite_btn(course, hasFavorited) %}
+  <li id="unfavorite-btn" data-toggle="tooltip" data-placement="top" data-original-title="取消收藏" data-url="{{ path('course_unfavorite', {id:course.id}) }}" {% if not hasFavorited %}style="display:none;"{% endif %}>
+    <a href="javascript:;" class="color-primary">
+      <p><i class="es-icon es-icon-bookmark"></i></p>
+      <p>已收藏</p>
+    </a>
+  </li>
+
+  <li id="favorite-btn" data-toggle="tooltip" data-placement="top" data-original-title="收藏课程" data-url="{{ path('course_favorite', {id:course.id}) }}" {% if hasFavorited %}style="display:none;"{% endif %}>
+    <a href="javascript:;">
+      <p><i class="es-icon es-icon-bookmarkoutline"></i></p>
+      <p>收藏</p>
+    </a>
+  </li>
+{% endmacro %}
+
+{% macro share_btn(course) %}
+  <li>
+    <span class="es-share top">
+      <a class="dropdown-toggle" href="" data-toggle="dropdown">
+        <p><i class="es-icon es-icon-share"></i></p>
+        <p>分享</p>
+      </a>
+      {% include 'TopxiaWebBundle:Common:share-dropdown.html.twig' with {type:'course'} %}
+    </span>
+  </li>
+{% endmacro %}

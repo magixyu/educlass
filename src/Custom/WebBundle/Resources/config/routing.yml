@@ -1,0 +1,79 @@
+my_teaching_courses:
+    pattern: /my/teaching/courses/{filter}
+    defaults: { _controller: CustomWebBundle:MyTeaching:courses, filter:'normal' }
+
+course_create:
+    pattern:  /course/create
+    defaults: { _controller: CustomWebBundle:Course:create }
+
+course_explore:
+    pattern:  /course/explore/{category}
+    defaults: { _controller: CustomWebBundle:Course:explore, category:'' }
+
+course_show:
+    pattern:  /course/{id}
+    defaults: { _controller: CustomWebBundle:Course:show }
+
+course_manage:
+    pattern:  /course/{id}/manage
+    defaults: { _controller: CustomWebBundle:CourseManage:index }
+
+course_manage_base:
+    pattern:  /course/{id}/manage/base
+    defaults: { _controller: CustomWebBundle:CourseManage:base }
+
+course_next_round:
+    pattern: /course/{id}/nextRound
+    defaults: { _controller: CustomWebBundle:Course:nextRound }
+
+course_rounding:
+    pattern: /course/{id}/rounding
+    defaults: { _controller: CustomWebBundle:Course:rounding }
+
+course_manage_lesson:
+    pattern:  /course/{id}/manage/lesson
+    defaults: { _controller: CustomWebBundle:CourseLessonManage:index }
+
+user_show: 
+    pattern:  /user/{id}
+    defaults: { _controller: CustomWebBundle:User:show }
+
+user_learn: 
+    pattern:  /user/{id}/learn
+    defaults: { _controller: CustomWebBundle:User:learn }
+
+user_favorited: 
+    pattern:  /user/{id}/favorited
+    defaults: { _controller: CustomWebBundle:User:favorited }
+
+my_homework_list:
+    pattern: /my/homework/list
+    defaults: { _controller: CustomWebBundle:CourseHomeworkManage:list }
+
+course_manage_lesson_homework_create:
+    pattern: /course/{courseId}/manage/lesson/{lessonId}/homework/create
+    defaults: { _controller: CustomWebBundle:CourseHomeworkManage:create }
+
+search:
+    pattern:  /search
+    defaults: { _controller: CustomWebBundle:Search:index }
+
+course_threads:
+    pattern:  /course/{id}/thread/
+    defaults: { _controller: CustomWebBundle:CourseThread:index }
+
+course_materials:
+    pattern:  /course/{id}/material/
+    defaults: { _controller: CustomWebBundle:CourseMaterial:index }
+
+course_review_list:
+    pattern:  /course/{id}/reviews/
+    defaults: { _controller: CustomWebBundle:CourseReview:index }
+
+course_notes:
+    pattern:  /course/{courseId}/notes
+    defaults: { _controller: CustomWebBundle:CourseNote:index }
+
+course_info:
+    pattern:  /course/{id}/info
+    defaults: { _controller: CustomWebBundle:CourseInfo:index }

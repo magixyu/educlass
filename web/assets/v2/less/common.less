@@ -1,0 +1,133 @@
+@font-face {font-family: 'webfont';
+  src: url('/assets/v2/css/fonts/webfont.eot');
+  src: url('/assets/v2/css/fonts/webfont.eot?#iefix') format('embedded-opentype'),
+  url('/assets/v2/css/fonts/webfont.woff') format('woff'),
+  url('/assets/v2/css/fonts/webfont.ttf') format('truetype'),
+  url('/assets/v2/css/fonts/webfont.svg#webfont') format('svg');
+}
+
+// 思源极细字体
+.webfont {
+  font-family: 'webfont' !important;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body { 
+  background: @bg-color;
+  word-wrap: break-word;
+  // 先观察，再决定是否删除
+  // word-break: break-all; 
+}
+
+html.html-nav-active {
+  position: relative;
+  overflow: hidden;
+}
+
+.es-wrap {
+  .es-transition;
+  &.nav-active {
+    transform: translate3d(250px, 0px, 0px);
+    -webkit-transform: translate3d(250px, 0px, 0px);
+    -o-transform: translate3d(250px, 0px, 0px);
+    -moz-transform: translate3d(250px, 0px, 0px);
+  }
+}
+
+.html-mask.active {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.2);
+  -ms-touch-action: none;
+  touch-action: none;
+}
+
+.tooltip {
+  min-width:40px;
+}
+
+#content-container {
+  margin: 30px auto;
+  min-height: 500px;
+}
+
+a:hover, 
+a:focus {
+  text-decoration: none;
+}
+
+.caret {
+  border-top: 4px solid;
+}
+
+// 全站公告
+.alert-notice {
+  .border-radius(none);
+  margin-bottom: 0;
+  padding: 0;
+  border: none;
+  color: @brand-primary;
+  .swiper-container {
+    position: relative;
+    height: 38px;
+    line-height: 38px;
+    overflow: hidden;
+  }
+  .swiper-wrapper {
+    padding-right: 30px;
+  }
+  .swiper-slide {
+    float: none;
+    .text-overflow;
+  }
+  .close {
+    float: none;
+    position: absolute;
+    top: 5px;
+    right: 0;
+    width: 30px;
+  }
+  a {
+    text-decoration: underline;
+  }
+}
+
+.aside-notice {
+  padding: 0;
+  .swiper-container {
+    position: relative;
+    padding: 0 15px;
+    height: 38px;
+    line-height: 38px;
+    overflow: hidden;
+  }
+  .swiper-slide {
+    float: none;
+    .text-overflow;
+    // a {
+    //   color: @brand-warning;
+    // }
+  }
+}
+
+.icon-user-status {
+  display: block;
+  width: 20px;
+  height: 20px;
+  line-height: 17px;
+  text-align: center;
+  border: 1px solid #fff;
+  background: @brand-danger;
+  color: #fff;
+  .border-radius(50%);
+  i {
+    font-size: 12px;
+  }
+}
